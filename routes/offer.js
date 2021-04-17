@@ -139,7 +139,7 @@ router.get("/offers", async (req, res) => {
     // }
 
     //console.log(result);
-    res.status(200).json({ count: count, offers: results });
+    res.status(200).json({ count: count, offersTEST: results });
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
