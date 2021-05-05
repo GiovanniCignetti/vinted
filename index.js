@@ -2,13 +2,13 @@
 require("dotenv").config(); // Permet d'activer les variables d'environnement qui se trouvent dans le fichier `.env`
 const cloudinary = require("cloudinary").v2;
 const express = require("express");
-// const cors = require("cors");
+const cors = require("cors");
 const formidable = require("express-formidable");
 const mongoose = require("mongoose");
 
 const app = express();
 app.use(formidable());
-// app.use(cors());
+app.use(cors());
 
 mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
