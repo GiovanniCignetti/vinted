@@ -15,16 +15,8 @@ const User = require("../models/User");
 router.post("/offer/publish", isAuthenticated, async (req, res) => {
   try {
     // récupération fields
-    const {
-      title,
-      description,
-      price,
-      condition,
-      city,
-      brand,
-      color,
-      size,
-    } = req.fields;
+    const { title, description, price, condition, city, brand, color, size } =
+      req.fields;
 
     // création de l'annonce avant l'upload afin d'avoir l'id
     const newOffer = new Offer({
@@ -49,7 +41,15 @@ router.post("/offer/publish", isAuthenticated, async (req, res) => {
         },
       ],
       // product_image: null,
-      owner: req.user,
+      owner: [
+        req.user,
+        {
+          avatar: {
+            secure_url:
+              "https://res.cloudinary.com/dwhuybdd2/image/upload/w_1000,ar_1:1,c_fill,g_auto,e_art:hokusai/v1618406064/samples/cloudinary-group.jpg",
+          },
+        },
+      ],
     });
 
     // await newOffer.save();
