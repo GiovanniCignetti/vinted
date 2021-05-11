@@ -13,9 +13,10 @@ const cors = require("cors");
 app.use(cors());
 
 router.post("/payment", isAuthenticated, async (req, res) => {
+  // router.post("/payment", async (req, res) => {
   try {
     // Recup stripeToken
-    console.log(req.fields.stripeToken);
+    // console.log(req.fields.stripeToken);
     const stripeToken = req.fields.stripeToken;
 
     // Appel API Stripe
