@@ -9,6 +9,9 @@ const app = express();
 app.use(formidable());
 const isAuthenticated = require("../middlewares/isAuthenticated");
 
+const cors = require("cors");
+app.use(cors());
+
 router.post("/payment", isAuthenticated, async (req, res) => {
   try {
     // Recup stripeToken
