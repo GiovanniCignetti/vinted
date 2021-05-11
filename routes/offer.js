@@ -14,6 +14,8 @@ const User = require("../models/User");
 
 router.post("/offer/publish", isAuthenticated, async (req, res) => {
   try {
+    // console.log(req.fields);
+    // console.log(req.user);
     // récupération fields
     const { title, description, price, condition, city, brand, color, size } =
       req.fields;
@@ -41,15 +43,13 @@ router.post("/offer/publish", isAuthenticated, async (req, res) => {
         },
       ],
       // product_image: null,
-      owner: [
-        req.user,
-        {
-          avatar: {
-            secure_url:
-              "https://res.cloudinary.com/dwhuybdd2/image/upload/w_1000,ar_1:1,c_fill,g_auto,e_art:hokusai/v1618406064/samples/cloudinary-group.jpg",
-          },
-        },
-      ],
+      owner: req.user,
+      // {
+      //   avatar: {
+      //     secure_url:
+      //       "https://res.cloudinary.com/dwhuybdd2/image/upload/w_1000,ar_1:1,c_fill,g_auto,e_art:hokusai/v1618406064/samples/cloudinary-group.jpg",
+      //   },
+      // },
     });
 
     // await newOffer.save();

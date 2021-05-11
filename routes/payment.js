@@ -16,19 +16,22 @@ router.post("/payment", isAuthenticated, async (req, res) => {
   // router.post("/payment", async (req, res) => {
   try {
     // Recup stripeToken
-    // console.log(req.fields.stripeToken);
+    // console.log(req.fields);
     const stripeToken = req.fields.stripeToken;
 
     // Appel API Stripe
     const response = await stripe.charges.create({
-      amount: 1000,
+      amount: `${req.fields.price * 100}`,
+      //   amount: 1000,
       currency: "eur",
-      description: "La description TEST",
+      description: `Achat de l'utilisateur ${req.fields.userName} id de l'offre: ${req.fields.offerId}`,
       source: stripeToken,
     });
     // Test de la réponse de l'API Stripe
     // console.log(response);
     if (response.status === "succeeded") {
+      // maj de l'annonce comme vendue
+
       res.status(200).json({ message: "Paiement validé" });
     } else {
       res.status(400).json({ message: "An error occured" });
